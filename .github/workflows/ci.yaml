@@ -1,0 +1,56 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  ci:
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        elixir: [1.13.4]
+        otp: [25.0.4]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup elixir env ⚗️
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ matrix.otp }}
+          elixir-version: ${{ matrix.elixir }}
+
+      - name: Cache elixir deps 📦
+        uses: actions/cache@v3
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+
+      - name: Install application dependencies 👨‍💻
+        run: mix deps.get
+
+      - name: Run application linter 👀
+        run: mix format --check-formatted
+
+      - name: Run application tests 🧪
+        run: mix test
+
+      - name: Coverage Report
+        uses: josecfreittas/elixir-coverage-feedback-action@v0.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          coverage_threshold: 85
