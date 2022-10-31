@@ -1,6 +1,5 @@
 defmodule Cubex.Rest do
   @behaviour Cubex.Base
-  use Tesla
 
   @moduledoc """
   Cube REST client implementation. Common options applicable to many functions:
