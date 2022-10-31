@@ -44,7 +44,8 @@ defmodule Cubex.MixProject do
       {:tesla, "~> 1.4"},
       {:joken, "~> 2.5"},
       {:uuid, "~> 1.1"},
-      {:mix_test_watch, "~> 1.1", only: [:dev, :test], runtime: false}
+      {:mix_test_watch, "~> 1.1", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.29", only: :dev, runtime: false}
     ]
   end
 end
