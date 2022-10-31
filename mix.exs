@@ -8,6 +8,7 @@ defmodule Cubex.MixProject do
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      description: "Cube client for Elixir",
       package: package(),
       preferred_cli_env: [
         "test.watch": :test
