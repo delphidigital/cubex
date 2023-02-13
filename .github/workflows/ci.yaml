@@ -8,6 +8,13 @@ on:
     branches:
       - master
 
+permissions:
+  # Add permissions for the test reporter to work on forks until resolved:
+  # https://github.com/dorny/test-reporter/issues/168
+  checks: write
+  contents: write
+  pull-requests: write
+
 jobs:
   ci:
     env:

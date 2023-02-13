@@ -62,7 +62,7 @@ defmodule Cubex.Rest do
   """
   @impl Cubex.Base
   def meta(client, opts \\ []) do
-    Tesla.get(client, "/cubejs-api/v1/meta", headers: req_headers(opts))
+    Tesla.get(client, "/cubejs-api/v1/meta", headers: req_headers(opts), query: meta_query(opts))
     |> handle_response("meta")
   end
 
@@ -128,6 +128,10 @@ defmodule Cubex.Rest do
 
   defp req_id(opts), do: Keyword.get(opts, :request_id, UUID.uuid4())
   defp seq_id(opts), do: Keyword.get(opts, :sequence_id, 1)
+
+  defp meta_query(opts) do
+    if Keyword.get(opts, :extended, false), do: %{extended: true}, else: %{}
+  end
 
   defp handle_response({:ok, %Tesla.Env{status: status, body: body}}, _action_str)
        when status >= 200 and status < 300 do

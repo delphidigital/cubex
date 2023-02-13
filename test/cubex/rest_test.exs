@@ -188,6 +188,30 @@ defmodule Cubex.RestTest do
       assert {:error, %{"error" => "error"}} == Rest.meta(client)
     end
 
+    test "meta/2 accepts the :extended option", %{client: client} do
+      mock_meta(%{"data" => "data"}, 200, fn %{query: q} ->
+        assert Map.get(q, :extended)
+      end)
+
+      Rest.meta(client, extended: true)
+    end
+
+    test "meta/2 omits :extended by default", %{client: client} do
+      mock_meta(%{"data" => "data"}, 200, fn %{query: q} ->
+        refute Map.has_key?(q, :extended)
+      end)
+
+      Rest.meta(client)
+    end
+
+    test "meta/2 omits :extended if false", %{client: client} do
+      mock_meta(%{"data" => "data"}, 200, fn %{query: q} ->
+        refute Map.has_key?(q, :extended)
+      end)
+
+      Rest.meta(client, extended: false)
+    end
+
     test "sql/3 returns body on success", %{client: client} do
       mock_sql(%{"data" => "data"})
       assert {:ok, %{"data" => "data"}} == Rest.sql(client, %{})

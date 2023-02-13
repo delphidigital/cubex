@@ -24,6 +24,9 @@ defmodule Cubex do
 
   @doc """
   Fetch cube metadata.
+
+  Options:
+    - `:extended` - returns additional join, sql, pre-aggregation, and segment information in the response. defaults to `false`
   """
   @impl Cubex.Base
   def meta(client, opts \\ []) do
