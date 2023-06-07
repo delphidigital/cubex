@@ -9,7 +9,7 @@ Adding `cubex` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:cubex, "~> 0.2.1"}
+    {:cubex, "~> 0.2"}
   ]
 end
 ```
