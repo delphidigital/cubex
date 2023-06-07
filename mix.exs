@@ -4,7 +4,7 @@ defmodule Cubex.MixProject do
   def project do
     [
       app: :cubex,
-      version: "0.2.1",
+      version: "0.2.2",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -41,8 +41,8 @@ defmodule Cubex.MixProject do
   defp deps do
     [
       {:jason, "~> 1.4"},
-      {:tesla, "~> 1.4"},
-      {:joken, "~> 2.5"},
+      {:tesla, "~> 1.7"},
+      {:joken, "~> 2.6"},
       {:uuid, "~> 1.1"},
       {:mix_test_watch, "~> 1.1", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.29", only: :dev, runtime: false}
