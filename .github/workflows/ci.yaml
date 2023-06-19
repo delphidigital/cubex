@@ -57,7 +57,7 @@ jobs:
         run: mix test
 
       - name: Coverage Report
-        uses: josecfreittas/elixir-coverage-feedback-action@v0.3
+        uses: josecfreittas/elixir-coverage-feedback-action@v0.4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           coverage_threshold: 85
